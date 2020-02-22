@@ -1,11 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
 import { BrowserRouter } from 'react-router-dom'
-
-import User from './components/User'
-
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
@@ -26,4 +23,4 @@ ReactDOM.render(
             <App />
         </ApolloProvider>    
     </BrowserRouter>
-, document.getElementById('root'));
+, document.getElementById('root'))

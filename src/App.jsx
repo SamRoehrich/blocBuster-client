@@ -1,10 +1,10 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
 
 import Header from './components/Header'
 
 import HomePage from './pages/Home'
+//import LoginPage from './pages/LoginPage'
 
 import { Route, Switch } from 'react-router-dom'
 
@@ -14,6 +14,7 @@ function App() {
     <Header />
     <Switch>
       <Route exact path='/' component={HomePage} />
+      <Route exact path='/login' component={LoginPage} />
     </Switch>
     </>
   )
