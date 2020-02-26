@@ -9,7 +9,8 @@ import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
 const httpLink = createHttpLink({
-    uri: 'https://us1.prisma.sh/sam_roehrich-ec0459/server/dev'
+    uri: 'http://localhost:4000/',
+    credentials: 'same-origin'
 })
 
 const client = new ApolloClient({
