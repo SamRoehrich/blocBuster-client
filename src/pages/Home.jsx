@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components'
+import CoachHomePage from './CoachHomePage'
 
 const HomePageContainer = styled.div`
     width: 100vw;
@@ -13,6 +14,7 @@ function HomePage() {
     return (
         <>
         <HomePageContainer>
+           <CoachHomePage />
 
         </HomePageContainer>
         </>

@@ -5,6 +5,8 @@ import gql from 'graphql-tag'
 import { Link, useHistory } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import styled from 'styled-components'
+import { AUTH_TOKEN } from '../constants'
+import { useCookies } from 'react-cookie'
 
 const LoginForm = styled.form`
     width: 100vw;
@@ -49,19 +51,22 @@ const Button = styled.button`
     }
 `
 
-const LOGIN_COACH = gql`
-    mutation loginCoach($email: String!, $password: String!) {
-        loginCoach(email: $email, password: $password){
+const LOGIN_USER = gql`
+    mutation loginUser($email: String!, $password: String!) {
+        loginUser(email: $email, password: $password){
             token
         }
     }
 `
 
 function Login() {
+    const [loginUser] = useMutation(LOGIN_USER, {
+        onCompleted(data) {
+            localStorage.setItem('token', data.loginUser.token)
+            history.goBack()
+        }
+    })
     let history = useHistory()
-
-    const [loginCoach, { data }] = useMutation(LOGIN_COACH)
-    const [login, setLogin] = useState(true)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -70,10 +75,14 @@ function Login() {
             onSubmit={
                 e => {
                     e.preventDefault();
-                    loginCoach({ variables: {
-                        email: email,
-                        password: password
-                    }})
+                    loginUser(
+                        { 
+                            variables: {
+                                email: email,
+                                password: password
+                            },
+                        }
+                    )
                 }
             }>
             <FormInput 
@@ -89,18 +98,13 @@ function Login() {
                 placeholder="Enter your password"
             />
             
-            <Button 
-                type="submit"
-                onClick={() => history.goBack()}
-            >   
-                Log in
-            </Button>
+            <Button type="submit"> Log in </Button>
 
             <Link to="/signup">Create an account</Link>
 
         </LoginForm>
-
     )
+
 }
 
 export default withRouter(Login)

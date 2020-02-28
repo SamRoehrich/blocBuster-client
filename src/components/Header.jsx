@@ -33,8 +33,7 @@ const HeaderLink = styled(Link)`
 
 
 function Header() {
-
-    const authToken = localStorage.getItem(AUTH_TOKEN)
+    const authToken = localStorage.getItem('token')
     return(
         <HeaderContainer>
         <HeaderLink to="/">Home</HeaderLink>
@@ -42,13 +41,10 @@ function Header() {
                 Coaches App
             </HeaderText>
          {
-             authToken 
-             ?
-             <HeaderLink to="/"
-                onClick={()=> {
-                    localStorage.removeItem(AUTH_TOKEN)
-                }}
-            > Log out </HeaderLink>
+            authToken ? (
+                <HeaderLink to="/"
+                onClick={()=> {localStorage.removeItem('token')}}
+            > Log out </HeaderLink>)
             : 
             <HeaderLink to="login">Log in</HeaderLink>
          }
