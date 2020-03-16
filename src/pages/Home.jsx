@@ -1,24 +1,16 @@
 import React from 'react'
 
-import styled from 'styled-components'
 import CoachHomePage from './CoachHomePage'
-
-const HomePageContainer = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-`;
+import LandingPage from './LandingPage'
 
 function HomePage() {
 
-    return (
-        <>
-        <HomePageContainer>
-           <CoachHomePage />
+    const user = localStorage.getItem('token')
 
-        </HomePageContainer>
-        </>
-    )
+    if(user) {
+        return <CoachHomePage />
+    }
+    return <LandingPage />
 }
 
 export default HomePage

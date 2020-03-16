@@ -5,8 +5,6 @@ import gql from 'graphql-tag'
 import { Link, useHistory } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import styled from 'styled-components'
-import { AUTH_TOKEN } from '../constants'
-import { useCookies } from 'react-cookie'
 
 const LoginForm = styled.form`
     width: 100vw;
@@ -51,18 +49,18 @@ const Button = styled.button`
     }
 `
 
-const LOGIN_USER = gql`
-    mutation loginUser($email: String!, $password: String!) {
-        loginUser(email: $email, password: $password){
+const LOGIN_COACH = gql`
+    mutation loginCoach($email: String!, $password: String!) {
+        loginCoach(email: $email, password: $password){
             token
         }
     }
 `
 
 function Login() {
-    const [loginUser] = useMutation(LOGIN_USER, {
+    const [loginCoach] = useMutation(LOGIN_COACH, {
         onCompleted(data) {
-            localStorage.setItem('token', data.loginUser.token)
+            localStorage.setItem('token', data.loginCoach.token)
             history.goBack()
         }
     })
@@ -75,7 +73,7 @@ function Login() {
             onSubmit={
                 e => {
                     e.preventDefault();
-                    loginUser(
+                    loginCoach(
                         { 
                             variables: {
                                 email: email,

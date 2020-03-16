@@ -1,59 +1,67 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import gql from 'graphql-tag'
+
+import Sidebar from '../components/Sidebar'
+import { useQuery } from 'react-apollo'
 
 const CoachPageContainer = styled.div`
     display: flex;
     width: 100vw;
     min-height: 100vh;
 `
-const SideBar = styled.div`
-    width: 10vw;
-    height: 100%;
+
+const MainView = styled.div`
+    height: 100vh;
+    width: 90vw;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
     flex-direction: column;
+    flex-wrap: wrap;
+    z-index: 2;
 `
 
-const SideBarLink = styled.button`
-    height: 10vh;
-    width: 100%;
-    background-color: blueviolet;
-    color: papayawhip;
-    cursor: pointer;
+const Button = styled.button`
+    height: 45vh;
+    width: 45vw;
+    border-radius: 30px;
+    border: 3px solid black;
+    font-size: 30px;
+    font-weight: 800;
+    background-color: black;
+    color: white;
+    transition: all .2s;
+
+    &:hover {
+        font-size: 35px;
+        opacity: 70%;
+        cursor: pointer;
+    }
+`
+
+const GET_COACH_DETAILS = gql`
+    query GetCoachDetails {
+        coachDetails {
+            fullName
+            team {
+                teamName
+                id
+            }
+        }
+    }
 `
 
 function CoachHomePage() {
+    const { loading, error, data } = useQuery(GET_COACH_DETAILS)
 
     return (
-        //side bar
-        //buttons for teams, athletes, workouts, stats
-        //each view is loaded from the active sidebar button
-        //landing page will have schedule where you can assign 
-        //workouts on any given day for any given team
-        //view all assigned workouts as well
         <CoachPageContainer>
-            <SideBar>
-                <SideBarLink>
-                    Home
-                </SideBarLink>
-
-                <SideBarLink>
-                    Manage Teams
-                </SideBarLink>
-
-                <SideBarLink>
-                    Manage Athletes
-                </SideBarLink>
-
-                <SideBarLink>
-                    Workout Library
-                </SideBarLink>
-
-                <SideBarLink>
-                    Resources
-                </SideBarLink>
-            </SideBar>
+            <Sidebar />
+            <MainView> 
+                <Button>View Teams</Button>
+                <Button>Make a Post</Button>
+                <Button>Create a Workout</Button>
+                <Button>Update Athlete Stats</Button>   
+            </MainView>
         </CoachPageContainer>
     )
 } 

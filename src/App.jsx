@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 
 import { Route, Switch } from 'react-router-dom'
+import Coach_ViewAthletes from './pages/Coach__ViewAthletes'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route exact path='/' component={HomePage} />
       <Route exact path='/signup' component={SignUp} />
       <Route exact path='/login' component={Login} />
+      <Route exact path='/athletespage' component={Coach_ViewAthletes} />
     </Switch>
     </>
   )

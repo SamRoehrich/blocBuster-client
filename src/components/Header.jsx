@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { AUTH_TOKEN } from '../constants.js'
 
 import styled from 'styled-components'
 
@@ -10,11 +9,6 @@ const HeaderText = styled.h1`
     justify-content: center;
     align-items: center;
 `;
-
-const LoginSignUp = styled.div`
-    display: flex;
-    justify-content: flex-end;
-`
 
 const HeaderContainer = styled.div`
     width: 100vw;
@@ -42,9 +36,10 @@ function Header() {
             </HeaderText>
          {
             authToken ? (
-                <HeaderLink to="/"
-                onClick={()=> {localStorage.removeItem('token')}}
-            > Log out </HeaderLink>)
+                <HeaderLink to="/" onClick={()=> {localStorage.removeItem('token')}}>
+                    Log out 
+                </HeaderLink>
+                )
             : 
             <HeaderLink to="login">Log in</HeaderLink>
          }
